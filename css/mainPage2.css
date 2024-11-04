@@ -1,0 +1,57 @@
+/* ----------------------- 폰트 ------------------------- */
+@font-face {
+  font-family: "GowunBatang-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.board-list {
+  width: 1100px;
+  margin: 100px auto;
+  display: flex;
+  gap: 40px;
+  font-family: "GowunBatang-Regular";
+}
+
+.board {
+  width: 550px;
+  height: 350px;
+  background: linear-gradient(135deg, #d5e6f1 0%, #dddfe0 100%);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  position: relative;
+}
+
+#matzip-list-items {
+  padding: 40px;
+}
+
+.more-btn {
+  text-decoration: none;
+  color: black;
+  position: absolute;
+  right: 45px;
+  top: 20px;
+}
+
+.matzip-list {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.matzip-list:hover {
+  background-color: #cce0e7;
+}
+
+.matzip-list > span:last-child {
+  color: gray;
+}
+
+.board-free {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

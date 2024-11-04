@@ -1,3 +1,13 @@
+/* -------------- 폰트 ---------------- */
+@font-face {
+  font-family: "Gyeonggi_Batang_Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2410-3@1.0/Batang_Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*  */
 .footer {
   position: absolute;
   bottom: 0;
@@ -6,7 +16,7 @@
   margin: 0 atuo;
 }
 
-hr[role='tournament2'] {
+hr[role="tournament2"] {
   border: 0px solid;
   height: 1px;
   background-image: linear-gradient(
@@ -19,7 +29,7 @@ hr[role='tournament2'] {
   display: block;
 }
 
-hr[role='tournament2']::before {
+hr[role="tournament2"]::before {
   position: absolute;
   background-color: #ffffff;
   border: 1px solid;
@@ -30,7 +40,7 @@ hr[role='tournament2']::before {
   transform: rotate(45deg);
   left: 50%;
   margin: -10px 0px 0px -22px;
-  content: '';
+  content: "";
 }
 
 .images {
@@ -42,4 +52,11 @@ hr[role='tournament2']::before {
   height: 50px;
 
   margin-left: 60px;
+}
+
+.footer-content {
+  position: absolute;
+  right: 2%;
+  bottom: 15%;
+  font-family: "Gyeonggi_Batang_Regular";
 }
