@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판</title>
+    <link rel="stylesheet" href="../css/boardList.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="board container">
+      <h1 class="m-0 text-center">게시판</h1>
+      <div class="text-end mb-3">
+        <button id="createPostBtn" class="btn btn-primary">게시글 생성</button>
+      </div>
+
+      <hr>
+
+      <table id="postList" class="post-table table table-bordered">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>아이디</th>
+            <th>등록 날짜</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 게시글 리스트가 여기 동적으로 생성됩니다 -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 게시글 생성 모달 구조 -->
+    <div id="createModal" class="modal">
+      <div class="modal-content">
+        <span class="close-create-btn">&times;</span>
+        <h2>게시글 생성</h2>
+        <input type="text" id="newPostTitle" placeholder="제목 입력" />
+        <textarea id="newPostContent" placeholder="내용 입력"></textarea>
+        <button id="savePostBtn">저장</button>
+      </div>
+    </div>
+
+    <script src="../js/boardList.js"></script>
+  </body>
+</html>
