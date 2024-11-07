@@ -1,5 +1,44 @@
-#map {
-  width: 60%;
-  height: 600px;
+.wrapper {
+  position: relative;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.main {
+  width: 950px;
   margin: 0 auto;
+}
+
+#map {
+  width: 50%;
+  height: 600px;
+  margin: 150px auto;
+  margin-bottom: 0;
+  float: left;
+}
+
+#restaurant-list {
+  margin-top: 150px;
+  height: 600px;
+  overflow-y: scroll;
+  float: left;
+}
+
+#restaurant-list::-webkit-scrollbar {
+  display: none;
+}
+
+.restaurant-item {
+  line-height: 20px;
+  width: 70%;
+  margin-left: 50px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer; /* 마우스 포인터를 커서로 변경 */
 }

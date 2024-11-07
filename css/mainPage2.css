@@ -18,7 +18,7 @@
 
 .board-list {
   width: 1040px;
-  margin: 100px auto;
+  margin: 130px auto;
   gap: 40px;
   font-family: "GowunBatang-Regular";
 }
@@ -44,8 +44,8 @@ hr.hr-1 {
 .more-btn {
   text-decoration: none;
   color: black;
-  position: absolute;
-  right: 23%;
+  position: relative;
+  left: 91%;
   top: 10px;
 }
 
