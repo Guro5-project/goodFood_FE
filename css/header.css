@@ -8,7 +8,7 @@
 .navbar {
     background: linear-gradient(135deg, #7CB9E8 0%, #89CFF0 100%);
     padding: 1.5rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
     width: 100%;
     top: 0;
@@ -19,7 +19,7 @@
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
 }
 
@@ -29,18 +29,24 @@
     gap: 0.5rem;
     text-decoration: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.5rem; 
     font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .logo svg {
     width: 32px;
     height: 32px;
-    filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.1));
+    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));
 }
 
-.login-btn {
+.nav-buttons {
+    display: flex;
+    gap: 1rem; 
+}
+
+.login-btn,
+.signup-btn {
     color: white;
     text-decoration: none;
     font-size: 1.1rem;
@@ -48,18 +54,22 @@
     border-radius: 20px;
     transition: all 0.3s ease;
     border: 2px solid white;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
 }
 
-.login-btn:hover {
-    background: rgba(255,255,255,0.3);
+.login-btn:hover,
+.signup-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
     .nav-container {
         padding: 0 1rem;
+    }
+    .nav-buttons {
+        gap: 0.5rem;
     }
 }
