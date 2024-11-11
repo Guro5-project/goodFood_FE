@@ -8,82 +8,95 @@
 }
 
 .wrapper {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-#footer {
-  position: absolute;
+#header, #footer {
   width: 100%;
 }
 
 .board-list {
-  width: 1040px;
-  margin: 100px auto;
-  gap: 40px;
-  font-family: "GowunBatang-Regular";
+  margin-top: 500px; 
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;  
 }
 
-hr.hr-1 {
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(
-    to right,
-    rgba(169, 183, 219, 0),
-    rgba(78, 177, 223, 0.75),
-    rgba(169, 183, 219, 0)
-  );
+.board-matzip {
+  position: relative;  
 }
 
-#matzip-list-items {
-  padding: 40px;
+/* Swiper */
+.swiper-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;  
+  margin: 0 auto;
+  height: 400px;  
+  overflow: hidden;  
+}
+
+.swiper-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
+  justify-content: space-between;
 }
 
-.more-btn {
-  text-decoration: none;
-  color: black;
-  position: absolute;
-  right: 23%;
-  top: 10px;
-}
-
-@media (max-width: 1100px) {
-  .more-btn {
-  }
+.swiper-slide {
+  width: 100%; 
+  padding: 15px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
 .matzip-list {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 380px;
-  background: linear-gradient(135deg, #d5e6f1 0%, #dddfe0 100%);
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
-  /* border-radius: 10px; */
-}
-
-.matzip-list:hover {
-  background-color: #cce0e7;
-}
-
-.matzip-list > span:last-child {
-  color: gray;
-}
-
-.matzip-list span {
-  padding: 15px 30px 0 30px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
 }
 
 .board-image {
   width: 100%;
-  height: 250px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-.board-content {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  word-break: break-all;
+.swiper-pagination {
+  position: absolute;          
+  bottom: 10px;                
+  left: 50%;                  
+  transform: translateX(-50%); 
+  z-index: 10;                 
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+}
+
+.swiper-button-prev {
+  left: 10px;
+}
+
+.swiper-button-next {
+  right: 10px;
 }
