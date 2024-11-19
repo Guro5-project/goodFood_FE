@@ -3,26 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 부트스트랩 적용 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/postPage2.css">
+    <script defer src="../js/postPage2.js"></script>
     <title>게시판(게시판 글쓰기 모달 생성)</title>
 </head>
 <body>
 
-    <h1>게시판(게시판 글쓰기 모달 생성)</h1>
+    <h1 class="text-center">게시판(게시판 글쓰기 모달 생성)</h1>
 
-    <button onclick="openModal()">글쓰기</button>
+    <!-- 글쓰기 버튼 -->
+    <div class="text-end">
+        <button class="btn btn-primary me-5" onclick="openModal()">글쓰기</button>
+    </div>
 
-    <div id="modal-wrapper" onclick="closeModal()">
-    </div>
-    <div id="modal">
-        <div id="modal-header">
-        <h3>게시글 작성 모달</h3>
-        <button onclick="closeModal()">X</button>
+    <!-- 게시판 글쓰기 모달 창 -->
+    <div id="modal_wrapper_p2" onclick="closeModal()">
+        <div id="modal_p2" onclick="event.stopPropagation();">
+            <div id="modal_header_p2">
+                <h3>게시글 작성</h3>
+            </div>
+            <div id="modal_body_p2">
+                <div class="form_group_p2">
+                    <label for="title">제목</label>
+                    <input type="text" id="title_p2" class="form_control_p2" placeholder="글 제목을 입력하세요">
+                </div>
+                <div class="form_group_p2">
+                    <label for="content">내용</label>
+                    <textarea id="content_p2" class="form-control_p2" placeholder="내용을 입력하세요" rows="4"></textarea>
+                </div>
+            </div>
+            <div id="modal_footer_p2">
+                <button type="button" class="btn btn-secondary btn_close_p2" onclick="closeModal()">닫기</button>
+                <button type="button" class="btn btn-primary btn_save_p2" onclick="submitPost()">저장</button>
+            </div>
+            <!-- 이미지 업로드 -->
+            <div class="form_group_p2">
+                <label for="image_p2">대표 이미지</label>
+                <input type="file" id="image_p2" class="form-control_p2" accept="image/*" onchange="previewImage(event)">
+            </div>
+
+            <!-- 이미지 미리보기 -->
+            <div id="imagePreview_p2" style="margin-top: 10px;">
+                <img id="previewImg" src="" alt="미리보기" style="max-width: 100%; display: none;">
+            </div>
         </div>
-        <div id="modal-body">
-            <p>게시글을 생성합니다.</p>
+    </div>
+
+    <!-- 게시판 그리기(부트스트랩 card View 활용) -->
+    <div class="container mt-4">
+        <div class="scrollable-cards" id="postCards_p2">
+            <!-- 임의로 카드 10개 생성(test) -->
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title 1</h5>
+                            <p class="card-text">작성자명</p>
+                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title 2</h5>
+                            <p class="card-text">작성자명</p>
+                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title 3</h5>
+                            <p class="card-text">작성자명</p>
+                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title 4</h5>
+                            <p class="card-text">작성자명</p>
+                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title 5</h5>
+                            <p class="card-text">작성자명</p>
+                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title 6</h5>
+                            <p class="card-text">작성자명</p>
+                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title 7</h5>
+                            <p class="card-text">작성자명</p>
+                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title 8</h5>
+                            <p class="card-text">작성자명</p>
+                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title 9</h5>
+                            <p class="card-text">작성자명</p>
+                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="../js/postPage2.js"></script>
+
+    <!-- 부트스트랩 적용 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
