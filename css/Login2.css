@@ -1,0 +1,200 @@
+:root { /*전체 문서에 대한 기본 값을 설정할 수 있는 특별한 선택자*/
+    --white: #ffffff;
+    --gray: #333;
+    --blue: rgb(0, 195, 255);
+    --lightblue: #008997;
+    --button-radius: 0.7rem;
+    --max-width: 400px;
+    --max-height: 450px; /* 높이를 450px로 수정하여 로그인 폼과 같은 크기 */
+    font-size: 16px;
+    font-family: "Jua", sans-serif;
+}
+
+body {
+    font-size: 14px;
+    font-family: "Jua", sans-serif;
+    /* 뷰포트(웹 페이지에서 사용자가 볼 수 있는 화면 영역)의 높이 */
+    height: 100vh;
+    display: flex;
+    /* 수평 중앙 정렬 */
+    justify-content: center;
+    /* 수직 중앙 정렬 */
+    align-items: center; 
+}
+
+/* 로그인 폼 */
+.login-wrapper {
+    width: 400px;
+    height: 450px;
+    padding:40px;
+    /* 요소의 크기를 계산할 때 패딩과 보더를 포함할지 제외할지 결정 */
+    /* border-box - 요소의 크기를 설정할 때 내용, 패딩, 테두리를 모두 포함하여 계산 */
+    box-sizing: border-box;
+    border: 4px solid rgb(0, 225, 255);
+    border-radius: 10px;
+}
+
+.login-wrapper > h2 {
+    font-size:30px;
+    color:rgb(1, 189, 247);
+    margin-bottom: 20px;
+}
+
+#login-form > input {
+    width:100%;
+    height: 50px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 5px;
+    border-color: rgb(88, 227, 236);
+    border: 1px solid #999999;
+}
+
+#login-form >input::placeholder {
+    color:#D2D2D2;
+}
+
+#login-form > input[type="submit"] {
+    color:#fff;
+    font-size: 15px;
+    background-color: rgb(0, 195, 255);
+    margin-top: 20px;
+}
+
+#login-form > input[type="checkbox"] {
+    display: none;
+    margin: 10px;
+}
+
+#login-form > label {
+    color:#999999;
+}
+
+.ah {
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.ah a{
+    color:#D2D2D2;
+    text-decoration-line: none;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+
+/* 모달창 */
+.modal-overlay {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;   
+}
+
+.modal-window {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 8px;
+    width:var(--max-width);
+    height: var(--max-height);
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 255, 255, 0.5);
+
+}
+
+/* 모달 헤더 */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size:20px;
+    margin:0;
+    color:var(--blue);
+}
+
+/* 모달 닫기 */
+.close-modal {
+    font-size:30px;
+    cursor:pointer;
+    color:var(--gray);
+}
+
+.modal-content {
+    margin-top:20px;
+}
+
+
+.input, .btn {
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 5px;
+    border-color: rgb(117, 203, 236);
+    border:1px solid #999999;
+}
+
+.input {
+    font-size: 16px;
+}
+
+.btn {
+    background-color: var(--blue);
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--lightblue);
+}
+
+.modal-content p {
+    font-size:14px;
+    color:#D2D2D2;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+
+.help-link, .back-to-login {
+    display: block;
+    color:#008997;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.help-link:hover, .back-to-login:hover {
+    text-decoration: underline;
+}
+
+
+
+/* 아이디 */
+
+#toggle-to-password {
+    color:#81d1da;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+/* 아이디 hover */
+
+#toggle-to-password:hover {
+    text-decoration: underline;
+}
