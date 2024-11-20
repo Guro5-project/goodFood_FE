@@ -41,61 +41,58 @@ function previewImage(event) {
 function submitPost() {
     const title = document.getElementById('title_p2').value;
     const content = document.getElementById('content_p2').value;
-    const image = document.getElementById('previewImg').src;  // 선택된 이미지 URL 가져오기
+    const previewImg = document.getElementById('previewImg');  // 미리보기 이미지
 
     // 이미지 URL이 유효한지 확인
-    if (!image || image === "data:," || image === "") {
+    const image = previewImg.src;  // 선택된 이미지 URL 가져오기
+
+    // 이미지 URL이 유효한지 확인
+    if (!image || image === "data:," || image === "" || image === "null") {
         alert('이미지가 업로드되지 않았습니다.');
         return; // 이미지가 없으면 글 작성 불가
+    }
+
+    // "게시글이 없습니다" 메시지 숨기기
+    const emptyMessage = document.getElementById('emptyMessage');
+    if (emptyMessage) {
+        emptyMessage.style.display = 'none';
     }
 
     if (title && content) {
         const cardDeck = document.getElementById('postCards_p2');
 
         // 새로운 카드 요소 생성
-        const card = document.createElement('div');
-        card.classList.add('col-12', 'mb-3');
-
         const cardElement = document.createElement('div');
-        cardElement.classList.add('card', 'mb-3');
+        cardElement.classList.add('card', 'mb-3', 'postItem_p2');
         cardElement.style.maxWidth = '540px';
 
-        const row = document.createElement('div');
-        row.classList.add('row', 'g-0');
-
-        // 카드 이미지 영역
-        const colImage = document.createElement('div');
-        colImage.classList.add('col-md-4');
-
+        // 카드 이미지 영역 
         const img = document.createElement('img');
-        img.src = image;  // 업로드된 이미지 사용
-        img.classList.add('img-fluid', 'rounded-start');
+        img.src = image;  
+        img.classList.add('card-img-top', 'thumbnail_p2');
         img.alt = "대표 이미지";
 
-         // 이미지 크기 강제 설정
-         img.width = 150; // 너비를 150px로 설정
-         img.height = 150; // 높이를 150px로 설정
-
         // 카드 본문 영역
-        const colBody = document.createElement('div');
-        colBody.classList.add('col-md-8');
-
         const cardBody = document.createElement('div');
-        cardBody.classList.add('card-body');
+        cardBody.classList.add('card-body', 'postItem_body_p2');
 
         const cardTitle = document.createElement('h5');
-        cardTitle.classList.add('card-title');
+        cardTitle.classList.add('card-title', 'postItem_title_p2');
         cardTitle.textContent = title;
 
         const cardText = document.createElement('p');
-        cardText.classList.add('card-text');
+        cardText.classList.add('card-text', 'postItem_text_p2');
         cardText.textContent = content;
 
         const smallText = document.createElement('p');
-        smallText.classList.add('card-text');
+        smallText.classList.add('card-text', 'postItem_text_p2');
+
+        // 작성일자 표시 (현재 시간)
+        const uploadDate = new Date().toLocaleDateString('ko-KR');
+        const uploadTime = new Date().toLocaleTimeString();
         const small = document.createElement('small');
         small.classList.add('text-body-secondary');
-        small.textContent = 'Last updated 3 mins ago';
+        small.textContent = uploadDate + " | " + uploadTime;
         smallText.appendChild(small);
 
         // 카드 요소를 결합
@@ -103,21 +100,32 @@ function submitPost() {
         cardBody.appendChild(cardText);
         cardBody.appendChild(smallText);
 
-        colBody.appendChild(cardBody);
-        row.appendChild(colImage);
-        row.appendChild(colBody);
+        // 카드에 이미지와 본문 결합
+        cardElement.appendChild(img);   
+        cardElement.appendChild(cardBody); 
 
-        cardElement.appendChild(row);
-        card.appendChild(cardElement);
-        cardDeck.appendChild(card);
+        cardDeck.appendChild(cardElement);
 
         // 모달 닫기 및 폼 초기화
         closeModal();
-        document.getElementById('title_p2').value = '';
-        document.getElementById('content_p2').value = '';
-        document.getElementById('previewImg').style.display = 'none';  // 미리보기 이미지 숨기기
+        resetModal(); 
     } else {
         alert('제목과 내용을 입력해주세요.');
     }
 }
 
+
+
+// 게시글 작성 모달 초기화 함수
+function resetModal() {
+
+    // 제목과 내용 초기화
+    document.getElementById('title_p2').value = '';
+    document.getElementById('content_p2').value = '';
+
+    // 이미지 미리보기 초기화
+    document.getElementById('previewImg').style.display = 'none';  // 미리보기 이미지 숨기기
+
+    // 파일 입력 초기화
+    document.getElementById('image_p2').value = '';  // 파일 입력 필드 초기화
+}

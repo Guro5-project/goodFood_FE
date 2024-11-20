@@ -34,153 +34,35 @@
                     <textarea id="content_p2" class="form-control_p2" placeholder="내용을 입력하세요" rows="4"></textarea>
                 </div>
             </div>
+        
+            <div class="d-flex flex-column align-items-center">
+                <!-- 이미지 업로드 -->
+                <div class="form_group_p2 d-flex gap-4">
+                    <label for="image_p2">대표 이미지</label>
+                    <input type="file" id="image_p2" name="upload" class="form-control_p2" accept="image/*" onchange="previewImage(event)">
+                </div>
+
+                <!-- 이미지 미리보기 -->
+                <div id="imagePreview_p2" style="margin-top: 10px;">
+                    <img id="previewImg" src="" alt="미리보기" style="max-width: 100%; display: none;">
+                </div>
+            </div>
+
             <div id="modal_footer_p2">
                 <button type="button" class="btn btn-secondary btn_close_p2" onclick="closeModal()">닫기</button>
                 <button type="button" class="btn btn-primary btn_save_p2" onclick="submitPost()">저장</button>
-            </div>
-            <!-- 이미지 업로드 -->
-            <div class="form_group_p2">
-                <label for="image_p2">대표 이미지</label>
-                <input type="file" id="image_p2" class="form-control_p2" accept="image/*" onchange="previewImage(event)">
-            </div>
-
-            <!-- 이미지 미리보기 -->
-            <div id="imagePreview_p2" style="margin-top: 10px;">
-                <img id="previewImg" src="" alt="미리보기" style="max-width: 100%; display: none;">
             </div>
         </div>
     </div>
 
     <!-- 게시판 그리기(부트스트랩 card View 활용) -->
-    <div class="container mt-4">
-        <div class="scrollable-cards" id="postCards_p2">
-            <!-- 임의로 카드 10개 생성(test) -->
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 1</h5>
-                            <p class="card-text">작성자명</p>
-                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
-                        </div>
-                    </div>
-                </div>
+    <div class="container_p2 mt-4">
+        <div class="scrollable_cards_p2 px-4" id="postCards_p2">
+            <!-- 게시글이 없을 때 기본 메시지 표시 -->
+            <div id="emptyMessage" class="text-center">
+                <p>게시글이 아직 없습니다. 게시글을 작성해 주세요.</p>
             </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 2</h5>
-                            <p class="card-text">작성자명</p>
-                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 3</h5>
-                            <p class="card-text">작성자명</p>
-                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 4</h5>
-                            <p class="card-text">작성자명</p>
-                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 5</h5>
-                            <p class="card-text">작성자명</p>
-                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 6</h5>
-                            <p class="card-text">작성자명</p>
-                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 7</h5>
-                            <p class="card-text">작성자명</p>
-                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 8</h5>
-                            <p class="card-text">작성자명</p>
-                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="https://via.placeholder.com/150" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title 9</h5>
-                            <p class="card-text">작성자명</p>
-                            <p class="card-text"><small class="text-body-secondary">등록일자</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- 게시글 추가 되는 부분 -->        
         </div>
     </div>
 
