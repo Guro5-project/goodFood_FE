@@ -3,14 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mypage1</title>
+    <title>내 정보</title>
     <link rel="stylesheet" href="/css/mypage1.css">
-    <link rel="stylesheet" href="/js/mypage1.js">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/mypage1.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <h1>안녕하세요</h1>
-    <p>테스트트트</p>
-    <p>테스트트트트</p>
-    <p>마지막테스트</p>
+    <div id="myInfo">
+        <h1>내 정보</h1>
+        <!-- 프로필 이미지 -->
+        <div id="profileSection">
+            <img id="profileImage" src="https://via.placeholder.com/150" alt="프로필 이미지">
+            <button id="changeProfileImage">프로필 이미지 변경</button>
+        </div>
+        <p><strong>ID:</strong> <span id="userId"></span></p>
+        <p><strong>이름:</strong> <span id="username"></span></p>
+        <p>
+            <strong>이메일:</strong> <span id="email"></span>
+            <button class="edit-button" data-field="email">정보 수정하기</button>
+        </p>
+        <p>
+            <strong>전화번호:</strong> <span id="phone"></span>
+            <button class="edit-button" data-field="phone">정보 수정하기</button>
+        </p>
+    </div>
+
+    <!-- 내가 쓴 글 목록 섹션 추가 -->
+    <div id="myPosts">
+        <h2>내가 쓴 글</h2>
+        <div class="post-stats">
+            <div class="stat-item">
+                <span class="stat-number" id="totalPosts">0</span>
+                <span class="stat-label">총 게시글</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="totalViews">0</span>
+                <span class="stat-label">전체 조회수</span>
+            </div>
+        </div>
+        <div class="post-filter">
+            <select id="sortOption">
+                <option value="latest">최신순</option>
+                <option value="views">조회수순</option>
+            </select>
+        </div>
+        <div class="post-list">
+            <!-- 게시글이 여기에 동적으로 추가됨 -->
+        </div>
+        <div class="pagination">
+            <button id="prevPage" class="page-btn">
+                <i class="fas fa-chevron-left"></i> 이전
+            </button>
+            <div class="page-numbers">
+                <span id="currentPage">1</span> / <span id="totalPages">1</span>
+            </div>
+            <button id="nextPage" class="page-btn">
+                다음 <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- 이미지 업로드 모달 -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>프로필 이미지 변경</h2>
+            <input type="file" id="uploadFile" accept="image/*">
+            <button id="uploadButton">업로드</button>
+        </div>
+    </div>
+
+    <!-- 정보 수정 모달 -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modalTitle">정보 수정</h2>
+            <input type="text" id="newValue" placeholder="새로운 값을 입력하세요">
+            <button id="saveButton">저장</button>
+        </div>
+    </div>
 </body>
 </html>
