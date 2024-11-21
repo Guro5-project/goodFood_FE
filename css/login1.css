@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+.signup-form {
+    background-color: #c7e6ee;
+    padding: 65px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+.signup-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.signup-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+.signup-form input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.checkUsernameBox {
+    position: relative; 
+    top: -5px; /* 위치를 조정하기 위한 마진 값 */ 
+    width: -20px;
+    background-color: #b8b3b3;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px; /* 버튼 테두리 둥글게 */ 
+    cursor: pointer;
+}
+
+.checkUsernameBox:hover {
+    background-color: #87898a;
+    color: #fff;
+}
+
+.join {
+    width: calc(100% - 20px);
+    padding: 10px;
+    background-color: #37aae4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 30px;
+    font-size: 20px;
+}
+.join:hover {
+    background-color: #2b578a;
+}
+#message {
+    display: block;
+    /* text-align: center; */
+    color: red;
+    margin-top: 5px;
+}
