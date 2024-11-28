@@ -14,11 +14,11 @@
 }
 
 .postItem_p2 {
-    flex: 0 0 calc(33.333% - 20px); /* 한 화면에 3개의 카드가 보이도록 */
-    max-width: 33.333%;  /* 최대 너비는 3개의 카드가 나란히 보이도록 */
-    transition: transform 0.3s ease; /* 카드 호버 시 확대 효과 */
-    border-radius: 10px; 
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
+    flex: 0 0 600px; /*한화면에3개의카드가보이도록*/
+    max-width: 600px; /*최대너비는3개의카드가나란히보이도록*/
+    transition: transform 0.3s ease; /*카드호버시확대효과*/
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .postItem_p2:hover {
