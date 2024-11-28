@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>게시글 상세보기</title>
+  <style>
+    /* 전체 페이지를 가운데 정렬 */
+    body {
+      display: flex;
+      justify-content: center; /* 가로 방향 가운데 정렬 */
+      align-items: center; /* 세로 방향 가운데 정렬 */
+      height: 100vh; /* 화면 전체 높이 */
+      margin: 0; /* 기본 여백 제거 */
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9; /* 배경 색상 */
+    }
+
+    /* 게시글 컨테이너 스타일 */
+    .container {
+      max-width: 600px; /* 최대 너비 */
+      width: 90%; /* 화면에 따라 가변 너비 */
+      background-color: white; /* 배경 흰색 */
+      padding: 20px; /* 내부 여백 */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+      border-radius: 10px; /* 둥근 테두리 */
+      text-align: center; /* 텍스트 가운데 정렬 */
+    }
+
+    /* 이미지 스타일 */
+    #postImage {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px; /* 둥근 이미지 */
+      margin-bottom: 20px; /* 이미지와 다른 요소 간격 */
+    }
+
+    /* 제목 스타일 */
+    #postTitle {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    /* 내용 스타일 */
+    #postContent {
+      font-size: 16px;
+      line-height: 1.6; /* 줄 간격 */
+      margin: 10px 0;
+    }
+
+    /* 작성자 및 날짜 스타일 */
+    #postAuthor,
+    #postDate {
+      font-size: 14px;
+      color: #666;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img id="postImage" alt="게시글 이미지" style="max-width: 100%; height: auto;" />
+    <h1 id="postTitle"></h1>
+    <p id="postContent"></p>
+    <p id="postAuthor"></p>
+    <p id="postDate"></p>
+  </div>
+
+  <script>
+   /**
+ * URL에서 쿼리 파라미터 추출
+ * @param {string} name 파라미터 이름
+ */
+function getQueryParameter(name) {
+  const queryString = window.location.search; // URL의 쿼리스트링 가져오기
+  const params = queryString.replace("?", "").split("&"); // '&' 기준으로 분리
+  for (let i = 0; i < params.length; i++) {
+    const [key, value] = params[i].split("=");
+    if (key === name) return value; // 원하는 파라미터의 값 반환
+  }
+  return null;
+}
+
+/**
+ * 게시글 상세보기 로드
+ */
+function loadPostDetail() {
+  const index = getQueryParameter("index"); // URL에서 인덱스 값 가져옴
+  const postsData = localStorage.getItem("boards");
+  if (!postsData) return;
+
+  const posts = eval(postsData);
+  const post = posts[index];
+
+  if (post) {
+    document.getElementById("postTitle").textContent = post.title;
+    document.getElementById("postContent").textContent = post.content;
+    document.getElementById("postAuthor").textContent = "작성자: " + post.username;
+    document.getElementById("postDate").textContent = "작성일: " + post.date;
+    if (post.image) {
+      document.getElementById("postImage").src = post.image;
+    }
+  } else {
+    document.body.textContent = "게시글을 찾을 수 없습니다.";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", loadPostDetail);
+  </script>
+</body>
+</html>

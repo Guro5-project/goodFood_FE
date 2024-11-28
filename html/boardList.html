@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판</title>
+    <!-- Bootstrap 5 CSS: 스타일링을 위해 사용 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <style>
+      /* 테이블이 포함된 컨테이너의 스타일 */
+      .table-container {
+        margin: 20px 0; /* 위아래 여백 추가 */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+        border-radius: 10px; /* 둥근 테두리 */
+        overflow: hidden; /* 테두리를 넘어가는 요소 숨김 */
+      }
+
+      /* 테이블 스타일 */
+      .table-container table {
+        width: 100%; /* 테이블의 너비를 컨테이너에 맞춤 */
+        margin: 0;
+        border-collapse: collapse; /* 테두리 간격 제거 */
+      }
+
+      .table-container th,
+      .table-container td {
+        text-align: center; /* 텍스트 가운데 정렬 */
+        padding: 10px; /* 셀 안쪽 여백 */
+        border: 1px solid #ddd; /* 셀 테두리 색상 */
+      }
+
+      .table-container th {
+        background-color: #007bff; /* 헤더 배경색 */
+        color: white; /* 헤더 텍스트 색상 */
+      }
+
+      /* 이미지 스타일: 크기를 제한하여 적절히 표시 */
+      .table-container td img {
+        max-width: 100px; /* 최대 너비 */
+        height: auto; /* 높이는 비율에 맞춤 */
+        border-radius: 5px; /* 둥근 이미지 */
+      }
+
+      /* 모달 배경 스타일 */
+      #createModal {
+        display: none; /* 기본적으로 숨겨짐 */
+        position: fixed; /* 화면에 고정 */
+        top: 0;
+        left: 0;
+        width: 100vw; /* 전체 화면 너비 */
+        height: 100vh; /* 전체 화면 높이 */
+        background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+        z-index: 1000; /* 다른 요소 위에 표시 */
+        justify-content: center; /* 수평 중앙 정렬 */
+        align-items: center; /* 수직 중앙 정렬 */
+      }
+
+      /* 모달 내부 콘텐츠 */
+      .modal-content {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        width: 80%; /* 기본적으로 80% 너비 */
+        max-width: 600px; /* 최대 너비 제한 */
+        max-height: 80%; /* 최대 높이 제한 */
+        overflow-y: auto; /* 내용이 넘칠 경우 스크롤 */
+        position: fixed; /* 화면에 고정 */
+        top: 50%; /* 화면의 50% 위치 */
+        left: 50%; /* 화면의 50% 위치 */
+        transform: translate(-50%, -50%); /* 정확히 중앙 정렬 */
+        z-index: 1000; /* 다른 요소 위에 표시 */
+      }
+
+      /* 모달 닫기 버튼 스타일 */
+      .close-create-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center">게시판</h1>
+
+      <!-- 게시글 생성 버튼 -->
+      <div class="text-end mb-3">
+        <button id="createPostBtn" class="btn btn-primary">게시글 생성</button>
+      </div>
+      <hr />
+
+      <!-- 게시글 테이블 -->
+      <div class="table-container">
+        <table id="postsTable">
+          <thead>
+            <tr>
+              <th>번호</th>
+              <!-- 게시글 번호 -->
+              <th>제목</th>
+              <!-- 게시글 제목 -->
+              <th>작성자</th>
+              <!-- 게시글 작성자 -->
+              <th>작성일</th>
+              <!-- 게시글 작성일 -->
+              <th>조회수</th>
+              <!-- 조회수 열 추가 -->
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 게시글 데이터는 JavaScript를 통해 동적으로 추가됨 -->
+          </tbody>
+        </table>
+      </div>
+       <!-- 페이지 네비게이션 -->
+       <div id="pagination" class="text-center">
+        <!-- 페이지 번호가 여기에 동적으로 추가됩니다. -->
+      </div>
+    </div>
+
+    <!-- 게시글 생성 모달 -->
+    <div id="createModal" class="modal">
+      <div class="modal-content">
+        <span class="close-create-btn">&times;</span>
+        <h2>게시글 생성</h2>
+        <input type="text" id="newPostTitle" placeholder="제목 입력" />
+        <textarea id="newPostContent" placeholder="내용 입력"></textarea>
+        <input type="file" id="newPostImage" accept="image/*" />
+        <button id="savePostBtn">저장</button>
+      </div>
+    </div>
+
+    <script>
+
+const postsPerPage = 10; // 한 페이지에 보여줄 게시글 수
+      let currentPage = 1; // 현재 페이지
+
+      /**
+       * 게시글 데이터를 로드하고 테이블에 추가
+       */
+      function loadPosts() {
+        const postsData = localStorage.getItem("boards"); // 로컬 스토리지에서 데이터를 문자열로 가져옴
+        const posts = postsData ? JSON.parse(postsData) : []; // 문자열 데이터를 배열로 변환
+        const tableBody = document.querySelector("#postsTable tbody"); // 테이블의 tbody 선택
+        const pagination = document.getElementById("pagination");
+        tableBody.innerHTML = ""; // 기존 내용을 초기화
+
+         // 게시글 인덱스 계산
+         const startIndex = (currentPage - 1) * postsPerPage;
+        const endIndex = startIndex + postsPerPage;
+        const paginatedPosts = posts.slice(startIndex, endIndex);
+
+        // 게시글 행 추가
+        paginatedPosts.forEach((post, index) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${startIndex + index + 1}</td>
+            <td><a href="postDetail.html?index=${startIndex + index}" class="post-link">${post.title}</a></td>
+            <td>${post.username}</td>
+            <td>${post.date}</td>
+            <td>${post.views}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        // 페이지 네비게이션 만들기
+        const totalPages = Math.ceil(posts.length / postsPerPage);
+        pagination.innerHTML = ""; // 기존 페이지 버튼 초기화
+
+        for (let i = 1; i <= totalPages; i++) {
+          const pageButton = document.createElement("button");
+          pageButton.innerHTML = i;
+          pageButton.classList.add("btn", "btn-link", "mx-1");
+          pageButton.onclick = function () {
+            currentPage = i; // 클릭한 페이지로 이동
+            loadPosts(); // 게시글 로드
+          };
+          pagination.appendChild(pageButton);
+        }
+
+        
+
+        // 게시글 제목 클릭 이벤트 추가
+        const links = document.querySelectorAll(".post-link");
+        for (let i = 0; i < links.length; i++) {
+          links[i].addEventListener("click", function (event) {
+            const index = i; // 클릭된 게시글의 인덱스
+            increaseViewCount(index); // 조회수 증가
+          });
+        }
+      }
+
+      /**
+       * 조회수 증가
+       * @param {number} index 게시글의 인덱스
+       */
+      function increaseViewCount(index) {
+        const postsData = localStorage.getItem("boards");
+        if (!postsData) return;
+        const posts = JSON.parse(postsData);
+
+        if (posts[index]) {
+          posts[index].views = posts[index].views ? posts[index].views + 1 : 1; // 조회수 증가
+          localStorage.setItem("boards", JSON.stringify(posts)); // 변경된 데이터를 다시 저장
+        }
+      }
+
+      
+
+      /**
+       * 모달 닫기 버튼 클릭 시 모달 숨김
+       */
+      document
+        .querySelector(".close-create-btn")
+        .addEventListener("click", function () {
+          document.getElementById("createModal").style.display = "none";
+        });
+
+      /**
+       * 페이지 로드 시 게시글 데이터를 로드
+       */
+      document.addEventListener("DOMContentLoaded", loadPosts);
+
+      // 게시글 생성 버튼 클릭 시 모달 표시 및 입력값 초기화
+      document
+        .getElementById("createPostBtn")
+        .addEventListener("click", function () {
+          // 모달 열기 전에 입력값을 초기화
+          document.getElementById("newPostTitle").value = "";
+          document.getElementById("newPostContent").value = "";
+          document.getElementById("newPostImage").value = ""; // 이미지 입력 초기화
+          document.getElementById("createModal").style.display = "block"; // 모달 열기
+
+          // 제목 입력란에 포커스 설정
+          document.getElementById("newPostTitle").focus();
+        });
+
+      // 게시글 생성 버튼 클릭 시 저장 처리
+      document
+        .getElementById("savePostBtn")
+        .addEventListener("click", function () {
+          const title = document.getElementById("newPostTitle").value; // 제목 입력 값
+          const content = document.getElementById("newPostContent").value; // 내용 입력 값
+          const image = document.getElementById("newPostImage").files[0]; // 이미지 파일
+
+          if (title && content) {
+            const postsData = localStorage.getItem("boards");
+            const posts = postsData ? JSON.parse(postsData) : []; // 기존 게시글 데이터 가져오기
+
+            // 새 게시글 생성
+            const newPost = {
+              title: title,
+              content: content,
+              username: localStorage.getItem("currentUser") || "익명 사용자", // 로그인된 사용자 이름 또는 기본값
+              date: new Date().toLocaleString(),
+              views: 0,
+              image: image ? URL.createObjectURL(image) : "", // 빈 문자열로 설정
+            };
+
+            posts.push(newPost); // 새 게시글 추가
+
+            // 로컬 스토리지에 게시글 데이터 저장
+            localStorage.setItem("boards", JSON.stringify(posts));
+
+            // 모달 닫기
+            document.getElementById("createModal").style.display = "none";
+
+            // 게시글 목록 새로 고침
+            loadPosts();
+          } else {
+            alert("제목과 내용을 모두 입력해주세요.");
+          }
+        });
+    </script>
+  </body>
+</html>
