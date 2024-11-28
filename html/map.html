@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/map.css" />
+    <title>Kakao Map API - Nearby Matzip Search</title>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cbab9989b1af143c98af86f51093ffb7&libraries=services"></script>
+    <style>
+      /* 지도 크기 설정 */
+      #map {
+        width: 100%;
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script>
+      // 카카오 맵 SDK 초기화
+      kakao.maps.load(function () {
+        var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+        // 현재 위치를 가져오는 함수
+        function getCurrentLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              function (position) {
+                var lat = position.coords.latitude; // 위도
+                var lng = position.coords.longitude; // 경도
+
+                // 지도를 생성합니다
+                var mapContainer = document.getElementById("map"),
+                  mapOption = {
+                    center: new kakao.maps.LatLng(lat, lng), // 현재 위치로 중심 설정
+                    level: 3, // 지도의 확대 레벨
+                  };
+
+                var map = new kakao.maps.Map(mapContainer, mapOption);
+                var ps = new kakao.maps.services.Places(map);
+
+                // 음식점 검색
+                const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+                const targetUrl = `http://dapi.kakao.com/v2/local/search/category.json?category_group_code=MT1&rect=${
+                  lng - 0.01
+                },${lat - 0.01},${lng + 0.01},${lat + 0.01}&page=1&size=15`;
+
+                // Fetch를 사용하여 요청하기
+                fetch(proxyUrl + targetUrl, {
+                  method: "GET",
+                  headers: {
+                    Authorization: "KakaoAK cbab9989b1af143c98af86f51093ffb7", // API 키 추가
+                  },
+                })
+                  .then((response) => response.json())
+                  .then((data) => {
+                    if (data.documents) {
+                      data.documents.forEach((place) => {
+                        displayMarker(place);
+                      });
+                    } else {
+                      console.error("검색 실패: ", data);
+                    }
+                  })
+                  .catch((error) => console.error("Error:", error));
+
+                function displayMarker(place) {
+                  var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: new kakao.maps.LatLng(place.y, place.x),
+                  });
+
+                  kakao.maps.event.addListener(marker, "click", function () {
+                    infowindow.setContent(
+                      '<div style="padding:5px;font-size:12px;">' +
+                        place.place_name +
+                        "</div>"
+                    );
+                    infowindow.open(map, marker);
+                  });
+                }
+              },
+              function (error) {
+                console.error("위치 정보를 가져오는 데 실패했습니다: ", error);
+              }
+            );
+          } else {
+            alert("이 브라우저는 Geolocation을 지원하지 않습니다.");
+          }
+        }
+
+        // 현재 위치 가져오기
+        getCurrentLocation();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&family=IBM+Plex+Sans+KR&family=Jua&family=Nanum+Gothic&family=Sunflower:wght@300&display=swap" rel="stylesheet">
+    
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/Login2.css">
+
+</head>
+<div class="login-wrapper">
+    <h2>Login</h2>
+    <form method="post" action="djfoewjfow" id="login-form">
+        <input type="text" name="username" placeholder="아이디를 입력해주세요">
+        <input type="password" name="uesrpassword" placeholder="비밀번호 입력해주세요">
+        <label for="re-check">
+            <input type="checkbox" id="re-check">아이디 저장하기
+        </label>
+        <input type="submit" value="Login">
+        <div class="ah">
+            <a href="dfoewfjw" >아이디 찾기</a>
+            <a href="javascript:void(0)" class="find-password-link">비밀번호 찾기</a>
+            <a href="login1.html">회원가입</a>
+        </div>
+    </form>
+</div>
+
+<!-- 모달 HTML 구조(아이디찾기와 비번 찾기) -->
+
+<!-- 아이디 찾기 모달창 -->
+ 
+
+<!-- 비밀번호 찾기 모달창 -->
+ <div id="find-password-modal" class="modal-overlay">
+    <div class="modal-window">
+        <div class="modal-header">
+            <h2>비밀번호 찾기</h2>
+            <span class="close-modal" id="close-find-password">&times;</span>
+        </div>
+        <div class="modal-content">
+            <input type="email" placeholder="등록된 이메일을 입력하세요." class="input" id="find-password-email">
+            <button class="btn" id="submit-find-password">비밀번호 찾기</button>
+        </div>
+        <div class="modal-content">
+            <p>비밀번호를 잊으셨나요?<br> 등록된 이메일을 입력하시면 비밀번호를 보내드리겠습니다.</p>
+            <form id="reset-password-form">
+                <input type="e mail" id="email" class="input" placeholder="이메일을 입력하세요." required/>
+                <button type="submit" class="btn">이메일 보내기</button>
+            </form>
+            <div class="ah">
+                <a href="#" class="help-link">이메일을 받지 못하셨나요?</a>
+                <a href="#" class="back-to-login"로그인 화면으로 돌아가기></a>
+            </div>
+
+            <!-- 하단 버튼들 -->
+             <div class="ah">
+                <!-- 아이디 찾기 -->
+
+                <a href="javascript:void(0)" id="toggle-to-password">비밀번호 찾기</a>
+             </div>
+        </div>
+    </div>
+ </div>
+
+ <script src="/js/Login2.js"></script>
+</body>
+</html>

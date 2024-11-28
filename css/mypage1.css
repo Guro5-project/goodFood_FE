@@ -1,0 +1,259 @@
+/* 전체 스타일 개선 */
+body {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 기본 스타일 */
+#myInfo {
+    font-family: 'Arial, sans-serif';
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 400px;
+    text-align: center;
+}
+
+#profileSection {
+    margin-bottom: 20px;
+}
+
+#profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#changeProfileImage {
+    display: block;
+    margin: 0 auto;
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#changeProfileImage:hover {
+    background-color: #0056b3;
+}
+
+.edit-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+/* 모달 창 스타일 수정 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 중앙 정렬을 위한 flexbox 속성 추가 */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* 다른 요소들 위에 표시되도록 */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    position: relative; /* close 버튼의 위치 기준점 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* 모달 애니메이션 추가 */
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+/* 모달 애니메이션 정의 */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #aaa;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+/* 모달 내부 요소 스타일링 */
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.modal-content button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+/* 내가 쓴 글 목록 스타일 */
+#myPosts {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 800px;
+}
+
+.post-list {
+    margin-top: 20px;
+}
+
+.post-item {
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.post-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-title {
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.post-info {
+    display: flex;
+    gap: 20px;
+    color: #666;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.page-btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.page-btn:not(:disabled):hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.page-numbers {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 반응형 디자인 개선 */
+@media (max-width: 768px) {
+    #myInfo, #myPosts {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .post-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* 통계 섹션 추가 */
+.post-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 필터 섹션 */
+.post-filter {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+#sortOption {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
