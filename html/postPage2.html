@@ -55,6 +55,44 @@
         </div>
     </div>
 
+    <!-- 게시글 상세 모달 창 -->
+    <div id="modal_detail_p2" onclick="closeDetailModal()" style="display: none;">
+        <div id="modal_p2_detail" onclick="event.stopPropagation();">
+            <div id="modal_header_p2_detail">
+                <h3 id="detail_title_p2">게시글 상세</h3>
+                <!-- 수정 및 삭제 버튼 -->
+                <div>
+                    <button class="btn btn-outline-primary btn-sm me-2">수정</button>
+                    <button class="btn btn-outline-danger btn-sm">삭제</button>
+                </div>
+            </div>
+            <div id="modal_body_p2_detail">
+                <div class="form_group_p2">
+                    <label>제목</label>
+                    <p id="detail_title_text_p2" class="form-control_p2"></p>
+                </div>
+                <div class="form_group_p2">
+                    <label>작성자</label>
+                    <p id="detail_author_text_p2" class="form-control_p2"></p>
+                </div>
+                <div class="form_group_p2">
+                    <label>내용</label>
+                    <p id="detail_content_text_p2" class="form-control_p2"></p>
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <!-- 상세 이미지 -->
+                <div id="detailImagePreview_p2" style="margin-top: 10px;">
+                    <img id="detail_previewImg" src="" alt="상세 이미지" style="max-width: 100%; display: none;">
+                </div>
+            </div>
+            <div id="modal_footer_p2_detail">
+                <button type="button" class="btn btn-secondary btn_close_p2" onclick="closeDetailModal()">닫기</button>
+            </div>
+        </div>
+    </div>
+
+
     <!-- 게시판 그리기(부트스트랩 card View 활용) -->
     <div class="container_p2 mt-4">
         <div class="scrollable_cards_p2 px-4" id="postCards_p2">
