@@ -1,13 +1,21 @@
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* 전체 스타일 개선 */
 body {
     background-color: #f5f5f5;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'BMJUA';
+    display: flex;
+    justify-content: center;
 }
 
 /* 기본 스타일 */
 #myInfo {
-    font-family: 'Arial, sans-serif';
-    margin: 20px auto;
+    margin: 20px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -145,7 +153,7 @@ body {
 
 /* 내가 쓴 글 목록 스타일 */
 #myPosts {
-    margin: 20px auto;
+    margin: 20px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;

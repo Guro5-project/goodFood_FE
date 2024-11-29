@@ -185,7 +185,7 @@ $(document).ready(function () {
         }
     });
 
-    // 초기화 시 게시글 목록 표시
+    // 초�� 게시글 목록 표시
     displayPosts(currentPage);
 
     // 초기화 시 통계 업데이트
